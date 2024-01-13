@@ -5,7 +5,7 @@ class ItemInfo {
     public readonly id: number,
     public readonly name: string,
     public readonly price: number,
-    public readonly createdAt: Date
+    public readonly createdAt: string
   ) {}
 
   static fromEntity(item: Item) {

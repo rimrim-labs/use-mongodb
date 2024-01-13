@@ -7,11 +7,11 @@ class CreateItem {
     public readonly remain: number,
     public readonly price: number,
     public readonly owner: string,
-    public readonly createdAt: Date
+    public readonly createdAt: string
   ) {}
 
-  toEntity() {
-    return new Item(this.id, this.name, this.remain, this.price, this.owner, this.createdAt)
+  static toEntity(item: CreateItem) {
+    return new Item(item.id, item.name, item.remain, item.price, item.owner, item.createdAt)
   }
 }
 

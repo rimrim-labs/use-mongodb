@@ -4,9 +4,9 @@ import itemService from './service'
 const router = Router()
 
 router.post('/', async function (req, res) {
-  const createItem = req.body
-  const insertedId = await itemService.save(createItem)
-  return res.send(insertedId)
+  const { item } = req.body
+  const insertedId = await itemService.save(item)
+  return res.status(201).location(`/items/${insertedId}`).send(insertedId)
 })
 
 router.get('/', async function (req, res) {

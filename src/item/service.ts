@@ -3,7 +3,7 @@ import ItemInfo from './dto/response/ItemInfo'
 import CreateItem from './dto/request/CreateItem'
 
 const save = async (item: CreateItem) => {
-  const res = await itemRepository.save(item.toEntity())
+  const res = await itemRepository.save(CreateItem.toEntity(item))
   return res.insertedId
 }
 
