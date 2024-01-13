@@ -4,6 +4,7 @@ import express from 'express'
 import createError, { HttpError } from 'http-errors'
 
 import indexRouter from './index'
+import itemRouter from './item'
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(cookieParser())
 
 // custom routes
 app.use('/', indexRouter)
+app.use('/items', itemRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
