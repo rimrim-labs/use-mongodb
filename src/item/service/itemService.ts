@@ -1,6 +1,6 @@
-import itemRepository from './repository'
-import ItemInfo from './dto/response/ItemInfo'
-import CreateItem from './dto/request/CreateItem'
+import itemRepository from '../domain/itemRepository'
+import ItemInfo from '../dto/response/ItemInfo'
+import CreateItem from '../dto/request/CreateItem'
 
 const save = async (item: CreateItem) => {
   const res = await itemRepository.save(CreateItem.toEntity(item))

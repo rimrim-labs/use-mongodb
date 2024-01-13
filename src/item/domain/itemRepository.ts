@@ -1,6 +1,6 @@
-import { db } from '../db/mongo'
+import { db } from '../../db/mongo'
 import { Collection } from 'mongodb'
-import Item from './domain/Item'
+import Item from './Item'
 
 const save = (item: Item) => {
   const items: Collection<Item> = db.collection('items')
