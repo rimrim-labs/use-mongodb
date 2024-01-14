@@ -1,10 +1,11 @@
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import express from 'express'
-import createError, { HttpError } from 'http-errors'
+import createError from 'http-errors'
 
 import indexRouter from './index'
 import itemRouter from './item'
+import InvalidError from './common/error/InvalidError'
 
 const app = express()
 
@@ -23,14 +24,26 @@ app.use(function (req, res, next) {
 })
 
 // error handler
-app.use(function (err: HttpError, req: express.Request, res: express.Response) {
+app.use(function (
+  err: Error,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
-  res.status(err.status || 500)
-  res.render('error')
+  let status: number = 500
+  let message: string = 'internal server error'
+
+  if (err instanceof InvalidError) {
+    status = 400
+    message = err.message
+  }
+
+  res.status(status).json(message)
 })
 
 export default app

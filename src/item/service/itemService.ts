@@ -1,6 +1,7 @@
 import itemRepository from '../domain/itemRepository'
 import ItemInfo from '../dto/response/ItemInfo'
 import CreateItem from '../dto/request/CreateItem'
+import InvalidError from '../../common/error/InvalidError'
 
 const save = async (item: CreateItem) => {
   const res = await itemRepository.save(CreateItem.toEntity(item))
@@ -14,7 +15,7 @@ const findAll = async () => {
 
 const findOne = async (id: number) => {
   const item = await itemRepository.findOne(id)
-  if (!item) throw new Error(`item ${id} does not exist!`)
+  if (!item) throw new InvalidError(`item ${id} does not exist!`)
   return ItemInfo.fromEntity(item)
 }
 
