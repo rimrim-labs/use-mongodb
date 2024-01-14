@@ -30,4 +30,11 @@ describe('GET /items/:id', () => {
     const res = await request(app).get('/items/1')
     expect(res.statusCode).toBe(200)
   })
+
+  test('item이 존재하지 않으면 400을 반환한다.', async () => {
+    const notExistId = 1_000_000_000
+    const res = await request(app).get(`/items/${notExistId}`)
+    expect(res.statusCode).toBe(400)
+    expect(res.body).toBe(`item ${notExistId} does not exist!`)
+  })
 })
