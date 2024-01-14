@@ -7,7 +7,7 @@ router.post('/', async function (req, res, next) {
   try {
     const { item } = req.body
     const insertedId = await itemService.save(item)
-    return res.status(201).location(`/items/${insertedId}`).send(insertedId)
+    return res.status(201).location(`/items/${insertedId}`).json(insertedId)
   } catch (err) {
     next(err)
   }
@@ -16,7 +16,7 @@ router.post('/', async function (req, res, next) {
 router.get('/', async function (req, res, next) {
   try {
     const items = await itemService.findAll()
-    return res.send(items)
+    return res.json(items)
   } catch (err) {
     next(err)
   }
@@ -26,7 +26,7 @@ router.get('/:id', async function (req, res, next) {
   try {
     const { id } = req.params
     const item = await itemService.findOne(+id)
-    return res.send(item)
+    return res.json(item)
   } catch (err) {
     next(err)
   }
