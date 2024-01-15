@@ -3,8 +3,8 @@ import app from '../../src/app'
 import { connectDB } from '../../src/db/mongo'
 import CreateItem from '../../src/item/dto/request/CreateItem'
 
-beforeAll(() => {
-  return connectDB()
+beforeAll(async () => {
+  await connectDB()
 })
 
 describe('POST /items', () => {
