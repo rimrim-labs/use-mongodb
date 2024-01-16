@@ -1,4 +1,4 @@
-import Item from '../../domain/Item'
+import { ItemType } from '../../domain/Item'
 
 class ItemInfo {
   constructor(
@@ -8,7 +8,7 @@ class ItemInfo {
     public readonly createdAt: string
   ) {}
 
-  static fromEntity(item: Item) {
+  static fromEntity(item: ItemType) {
     return new ItemInfo(item.id, item.name, item.price, item.createdAt)
   }
 }

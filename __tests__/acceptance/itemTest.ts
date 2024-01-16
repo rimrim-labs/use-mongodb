@@ -1,10 +1,10 @@
 import request from 'supertest'
 import app from '../../src/app'
-import { connectDB } from '../../src/db/mongo'
+import { connect } from '../../src/mongo'
 import CreateItem from '../../src/item/dto/request/CreateItem'
 
 beforeAll(async () => {
-  await connectDB()
+  await connect()
 })
 
 describe('POST /items', () => {

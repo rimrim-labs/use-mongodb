@@ -1,31 +1,26 @@
-import { db } from '../../db/mongo'
-import { Collection } from 'mongodb'
-import Item from './Item'
+import { Items, ItemType } from './Item'
 
-const save = (item: Item) => {
-  const items: Collection<Item> = db.collection('items')
-  return items.insertOne(item)
+const save = (item: ItemType) => {
+  const created = new Items({
+    ...item,
+  })
+  return created.save()
 }
 
-async function findOne(id: number) {
-  const items: Collection<Item> = db.collection('items')
-  return await items.findOne({ id })
+function findOne(id: number) {
+  return Items.findOne({ id })
 }
 
 function findAll() {
-  const items: Collection<Item> = db.collection('items')
-  const res = items.find({})
-  return res.toArray()
+  return Items.find({})
 }
 
-function updateOne(id: number, item: Item) {
-  const items: Collection<Item> = db.collection('items')
-  return items.updateOne({ id }, item)
+function updateOne(id: number, item: ItemType) {
+  return Items.updateOne({ id }, item)
 }
 
 function deleteOne(id: number) {
-  const items: Collection<Item> = db.collection('items')
-  return items.deleteOne({ id })
+  return Items.deleteOne({ id })
 }
 
 export default { save, findOne, findAll, updateOne, deleteOne }
