@@ -1,9 +1,9 @@
 import app from './src/app'
-import { connectDB } from './src/db/mongo'
+import { connect } from './src/mongo'
 
 const PORT = 3000
 
 app.listen(PORT, async () => {
-  await connectDB()
+  await connect()
   console.log(`Example server listening on port ${PORT}`)
 })

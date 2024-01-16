@@ -1,14 +1,33 @@
-class Item {
-  public readonly _id: string | null = null
+import mongoose from 'mongoose'
 
-  constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly remain: number,
-    public readonly price: number,
-    public readonly owner: string,
-    public readonly createdAt: string
-  ) {}
+/**
+ * Item type
+ */
+interface ItemType {
+  id: number
+  name: string
+  remain: number
+  price: number
+  owner: string
+  createdAt: string
 }
 
-export default Item
+/**
+ * Mongoose Schema
+ */
+const ItemSchema = new mongoose.Schema<ItemType>({
+  id: Number,
+  name: String,
+  remain: Number,
+  price: Number,
+  owner: String,
+  createdAt: String,
+})
+
+/**
+ * Compile Schema to Mongoose Model
+ * - create document
+ */
+const Items = mongoose.model('Item', ItemSchema)
+
+export { ItemType, Items }

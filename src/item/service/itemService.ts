@@ -5,7 +5,7 @@ import InvalidError from '../../common/error/InvalidError'
 
 const save = async (item: CreateItem) => {
   const res = await itemRepository.save(CreateItem.toEntity(item))
-  return res.insertedId
+  return res._id
 }
 
 const findAll = async () => {

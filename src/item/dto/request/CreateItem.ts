@@ -1,4 +1,4 @@
-import Item from '../../domain/Item'
+import { ItemType } from '../../domain/Item'
 
 class CreateItem {
   constructor(
@@ -10,8 +10,15 @@ class CreateItem {
     public readonly createdAt: string
   ) {}
 
-  static toEntity(item: CreateItem) {
-    return new Item(item.id, item.name, item.remain, item.price, item.owner, item.createdAt)
+  static toEntity(item: CreateItem): ItemType {
+    return {
+      id: item.id,
+      name: item.name,
+      remain: item.remain,
+      price: item.price,
+      owner: item.owner,
+      createdAt: item.createdAt,
+    }
   }
 }
 
