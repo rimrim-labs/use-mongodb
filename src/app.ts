@@ -1,7 +1,7 @@
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import express from 'express'
-import createError from 'http-errors'
+import createError, { HttpError } from 'http-errors'
 
 import indexRouter from './index'
 import itemRouter from './item'
@@ -40,6 +40,11 @@ app.use(function (
 
   if (err instanceof InvalidError) {
     status = 400
+    message = err.message
+  }
+
+  if (err instanceof HttpError) {
+    status = err.statusCode
     message = err.message
   }
 

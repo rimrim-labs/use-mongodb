@@ -1,17 +1,30 @@
 import { Router } from 'express'
 import itemService from './service/itemService'
+import { ajv } from '../validator/itemValidator'
+import CreateItem from './dto/request/CreateItem'
+import createHttpError from 'http-errors'
 
 const router = Router()
 
-router.post('/', async function (req, res, next) {
-  try {
-    const { item } = req.body
-    const insertedId = await itemService.save(item)
-    return res.status(201).location(`/items/${insertedId}`).json(insertedId)
-  } catch (err) {
-    next(err)
+router.post(
+  '/',
+  (req, res, next) => {
+    const validate = ajv.getSchema<CreateItem>('createItem')
+    if (validate && validate(req.body)) {
+      next()
+    }
+    next(createHttpError(400, 'Invalid Request Body'))
+  },
+  async function (req, res, next) {
+    try {
+      const { item } = req.body
+      const insertedId = await itemService.save(item)
+      return res.status(201).location(`/items/${insertedId}`).json(insertedId)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 router.get('/', async function (req, res, next) {
   try {
