@@ -10,8 +10,9 @@ router.post(
   '/',
   (req, res, next) => {
     const validate = ajv.getSchema<CreateItem>('createItem')
-    if (validate && validate(req.body)) {
+    if (validate && validate(req.body.item)) {
       next()
+      return
     }
     next(createHttpError(400, 'Invalid Request Body'))
   },
