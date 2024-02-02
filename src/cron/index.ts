@@ -1,6 +1,7 @@
 import { Agenda, Job } from 'agenda'
 import { Items } from '../item/domain/Item'
 import dotenv from 'dotenv'
+import { addMilliseconds } from 'date-fns'
 
 dotenv.config({ path: '.env.local' })
 
@@ -26,6 +27,12 @@ agenda.define('create new item', async (job: Job<Data>) => {
     createdAt: new Date(),
   })
   await item.save()
+})
+
+agenda.on('fail', (err, job) => {
+  console.error('err occurred!')
+  job.attrs.nextRunAt = addMilliseconds(new Date(), 10_000) // retry 10 seconds later
+  job.save()
 })
 
 export async function schedule() {
