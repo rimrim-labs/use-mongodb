@@ -6,7 +6,7 @@ dotenv.config({ path: '.env.local' })
 
 const DB_URL = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`
 
-const agenda = new Agenda({ db: { address: DB_URL } })
+const agenda = new Agenda({ db: { address: DB_URL }, processEvery: '30 seconds' })
 
 interface Data {
   id: number
@@ -31,7 +31,7 @@ agenda.define('create new item', async (job: Job<Data>) => {
 export async function schedule() {
   await agenda.start()
 
-  await agenda.every('3 minutes', 'create new items', {
+  await agenda.every('3 minutes', 'create new item', {
     id: Math.floor(Math.random() * 100) + 1,
   })
 }
