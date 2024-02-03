@@ -5,11 +5,11 @@ class ItemInfo {
     public readonly id: number,
     public readonly name: string,
     public readonly price: number,
-    public readonly createdAt: Date
+    public readonly createdAt: number
   ) {}
 
   static fromEntity(item: ItemType) {
-    return new ItemInfo(item.id, item.name, item.price, item.createdAt)
+    return new ItemInfo(item.id, item.name, item.price, item.createdAt.valueOf())
   }
 }
 
