@@ -14,9 +14,11 @@ export const validate =
   ) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      if (schema.body) await schema.body.validate(req.body)
-      if (schema.query) await schema.query.validate(req.query)
-      if (schema.params) await schema.params.validate(req.params)
+      const keys = Object.keys(schema) as Array<keyof ValidationSchema<P, Q, B>>
+
+      for (const key of keys) {
+        if (schema[key]) await schema[key]!.validate(req[key])
+      }
       return next()
     } catch (err) {
       next(createError(400, 'Invalid Request'))
