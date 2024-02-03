@@ -5,15 +5,19 @@ import { CreateItemSchema } from '../validation/item'
 
 const router = Router()
 
-router.post('/', validate(CreateItemSchema), async function (req, res, next) {
-  try {
-    const { item } = req.body
-    const insertedId = await itemService.save(item)
-    return res.status(201).location(`/items/${insertedId}`).json(insertedId)
-  } catch (err) {
-    next(err)
+router.post(
+  '/',
+  async (req, res, next) => validate(req.body.item, CreateItemSchema, next),
+  async function (req, res, next) {
+    try {
+      const { item } = req.body
+      const insertedId = await itemService.save(item)
+      return res.status(201).location(`/items/${insertedId}`).json(insertedId)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 router.get('/', async function (req, res, next) {
   try {
