@@ -10,22 +10,16 @@ beforeAll(async () => {
 describe('POST /items', () => {
   test('item 1건을 생성한다.', async () => {
     const item = new CreateItem(1, 'test', 200, 1000, 'me', new Date())
-    const res = await request(app)
-      .post('/items')
-      .set('Content-Type', 'application/json')
-      .send({ item })
+    const res = await request(app).post('/items').set('Content-Type', 'application/json').send(item)
     expect(res.statusCode).toBe(201)
   })
 
   test('body가 item을 포함하지 않으면 400을 반환한다.', async () => {
     const item = { id: 1, name: 'test' }
-    const res = await request(app)
-      .post('/items')
-      .set('Content-Type', 'application/json')
-      .send({ item })
+    const res = await request(app).post('/items').set('Content-Type', 'application/json').send(item)
 
     expect(res.statusCode).toBe(400)
-    expect(res.body).toBe('Invalid Request Body')
+    expect(res.body).toBe('Invalid Request')
   })
 })
 
