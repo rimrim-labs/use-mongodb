@@ -1,8 +1,17 @@
 import itemService from '../service/itemService'
 import { Request, Response } from 'express'
+import CreateItem from '../dto/request/CreateItem'
 
 export async function createItem(req: Request, res: Response) {
-  const { item } = req.body
+  const { body } = req
+  const item = new CreateItem(
+    body.id,
+    body.name,
+    body.remain,
+    body.price,
+    body.owner,
+    body.createdAt
+  )
   const insertedId = await itemService.save(item)
   return res.status(201).location(`/items/${insertedId}`).json(insertedId)
 }

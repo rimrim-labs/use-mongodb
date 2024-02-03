@@ -7,7 +7,9 @@ const router = Router()
 
 router.post(
   '/',
-  async (req, res, next) => validate(req.body.item, CreateItemSchema, next),
+  validate({
+    body: CreateItemSchema,
+  }),
   async function (req, res, next) {
     try {
       await itemController.createItem(req, res)
