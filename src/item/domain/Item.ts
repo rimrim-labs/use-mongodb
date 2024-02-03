@@ -9,7 +9,7 @@ interface ItemType {
   remain: number
   price: number
   owner: string
-  createdAt: string
+  createdAt: Date
 }
 
 /**
@@ -22,7 +22,7 @@ const ItemSchema = new mongoose.Schema<ItemType>(
     remain: Number,
     price: Number,
     owner: String,
-    createdAt: String,
+    createdAt: Date,
   },
   {
     timestamps: {

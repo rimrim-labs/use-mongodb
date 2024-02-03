@@ -9,7 +9,7 @@ beforeAll(async () => {
 
 describe('POST /items', () => {
   test('item 1건을 생성한다.', async () => {
-    const item = new CreateItem(1, 'test', 200, 1000, 'me', new Date().toISOString())
+    const item = new CreateItem(1, 'test', 200, 1000, 'me', new Date())
     const res = await request(app)
       .post('/items')
       .set('Content-Type', 'application/json')

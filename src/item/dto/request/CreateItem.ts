@@ -7,7 +7,7 @@ class CreateItem {
     public readonly remain: number,
     public readonly price: number,
     public readonly owner: string,
-    public readonly createdAt: string
+    public readonly createdAt: Date
   ) {}
 
   static toEntity(item: CreateItem): ItemType {
