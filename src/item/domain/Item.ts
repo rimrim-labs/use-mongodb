@@ -15,14 +15,21 @@ interface ItemType {
 /**
  * Mongoose Schema
  */
-const ItemSchema = new mongoose.Schema<ItemType>({
-  id: Number,
-  name: String,
-  remain: Number,
-  price: Number,
-  owner: String,
-  createdAt: String,
-})
+const ItemSchema = new mongoose.Schema<ItemType>(
+  {
+    id: Number,
+    name: String,
+    remain: Number,
+    price: Number,
+    owner: String,
+    createdAt: String,
+  },
+  {
+    timestamps: {
+      createdAt: 'insertedAt',
+    },
+  }
+)
 
 /**
  * Compile Schema to Mongoose Model
