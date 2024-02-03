@@ -1,9 +1,11 @@
 import { Router } from 'express'
 import itemService from './service/itemService'
+import { validate } from '../validation'
+import { CreateItemSchema } from '../validation/item'
 
 const router = Router()
 
-router.post('/', async function (req, res, next) {
+router.post('/', validate(CreateItemSchema), async function (req, res, next) {
   try {
     const { item } = req.body
     const insertedId = await itemService.save(item)

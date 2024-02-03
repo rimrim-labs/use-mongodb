@@ -25,7 +25,7 @@ describe('POST /items', () => {
       .send({ item })
 
     expect(res.statusCode).toBe(400)
-    expect(res.body).toBe('Invalid Request Body')
+    expect(res.body).toBe('Invalid Request')
   })
 })
 
