@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
-import { AnyObject, ObjectSchema } from 'yup'
+import { AnyObject, ObjectSchema, ValidationError } from 'yup'
 import InvalidError from '../errors/InvalidError'
 
 interface ValidationSchema<P extends AnyObject, Q extends AnyObject, B extends AnyObject> {
@@ -21,6 +21,8 @@ export const validate =
       }
       return next()
     } catch (err) {
-      next(new InvalidError('Invalid Request'))
+      let message = 'Invalid Request'
+      if (err instanceof ValidationError) message = err.message
+      next(new InvalidError(message))
     }
   }

@@ -19,7 +19,7 @@ describe('POST /items', () => {
     const res = await request(app).post('/items').set('Content-Type', 'application/json').send(item)
 
     expect(res.statusCode).toBe(400)
-    expect(res.body).toBe('Invalid Request')
+    expect(res.body).toBe('createdAt 은(는) 필수 값입니다.')
   })
 })
 
