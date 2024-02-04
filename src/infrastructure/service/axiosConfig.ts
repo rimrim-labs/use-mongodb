@@ -17,12 +17,8 @@ export const instance = axios.create({
 const errorHandler = (error: AxiosError<ServeErrorResponse>) => {
   let externalError: BaseError = new ServerError('문제가 생겼습니다. 다시 시도해주세요.')
 
-  // 타임아웃
-  if (error.code === 'ECONNABORTED') {
-    return Promise.reject(externalError)
-  }
-
   // 존재하지 않는 id
+  // axios 에서 HTTP 에러로 던지기 or 도메인 에러로 던지고 service 에서 재처리
   if (error.response && error.response.data.code === 'NotFound') {
     externalError = new IllegalStateError('존재하지 않습니다.')
   }
