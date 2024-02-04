@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express'
 import { AnyObject, ObjectSchema } from 'yup'
-import createError from 'http-errors'
+import InvalidError from '../errors/InvalidError'
 
 interface ValidationSchema<P extends AnyObject, Q extends AnyObject, B extends AnyObject> {
   body?: ObjectSchema<B>
@@ -21,6 +21,6 @@ export const validate =
       }
       return next()
     } catch (err) {
-      next(createError(400, 'Invalid Request'))
+      next(new InvalidError('Invalid Request'))
     }
   }

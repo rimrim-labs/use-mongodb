@@ -1,7 +1,7 @@
 import itemRepository from '../domain/itemRepository'
 import ItemInfo from '../dto/response/ItemInfo'
 import CreateItem from '../dto/request/CreateItem'
-import InvalidError from '../../common/error/InvalidError'
+import InvalidError from '../../errors/InvalidError'
 
 const save = async (item: CreateItem) => {
   const res = await itemRepository.save(CreateItem.toEntity(item))
