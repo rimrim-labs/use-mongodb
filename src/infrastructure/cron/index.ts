@@ -1,5 +1,5 @@
 import { Agenda, Job } from 'agenda'
-import { Items } from '../item/domain/Item'
+import { Items } from '../../item/domain/Item'
 import dotenv from 'dotenv'
 import { addMilliseconds } from 'date-fns'
 
