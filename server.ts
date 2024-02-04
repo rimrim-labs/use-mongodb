@@ -1,6 +1,6 @@
 import app from './src/app'
 import { connect } from './src/mongo'
-import { schedule } from './src/cron'
+import { schedule } from './src/infrastructure/cron'
 
 const PORT = 3000
 
