@@ -5,7 +5,7 @@ import createError, { HttpError } from 'http-errors'
 
 import indexRouter from './index'
 import itemRouter from './item'
-import InvalidError from './common/error/InvalidError'
+import BaseError from './errors/BaseError'
 
 const app = express()
 
@@ -38,8 +38,8 @@ app.use(function (
   let status: number = 500
   let message: string = 'internal server error'
 
-  if (err instanceof InvalidError) {
-    status = 400
+  if (err instanceof BaseError) {
+    status = err.status
     message = err.message
   }
 

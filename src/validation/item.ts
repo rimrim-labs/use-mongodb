@@ -1,10 +1,10 @@
-import { date, number, object, string } from 'yup'
+import yup from './config'
 
-export const CreateItemSchema = object({
-  id: number().integer().positive().required(),
-  name: string().required(),
-  remain: number().integer().positive().required(),
-  price: number().integer().positive().required(),
-  owner: string().required(),
-  createdAt: date().required(),
+export const CreateItemSchema = yup.object({
+  id: yup.number().integer().positive().required(),
+  name: yup.string().required(),
+  remain: yup.number().integer().positive().required(),
+  price: yup.number().integer().positive().required(),
+  owner: yup.string().required(),
+  createdAt: yup.date().required(),
 })
